@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Vicky! 🎉❤️</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f06, #9f6);
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+            z-index: 10;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        h1 {
+            font-size: 60px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px #000;
+        }
+        p {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: #ff5733;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 8px;
+            margin: 20px;
+        }
+        button:hover {
+            background: #ffc107;
+        }
+        .emoji {
+            position: fixed;
+            font-size: 40px;
+            animation: glide 5s linear infinite;
+            opacity: 0.9;
+            z-index: 1;
+        }
+        @keyframes glide {
+            0% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .hidden {
+            display: none;
+        }
+        .heart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 0s linear 1s;
+        }
+        .heart-container.show {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease-in-out;
+        }
+        .heart {
+            font-size: 64px;
+            animation: heartbeat 1.5s infinite;
+            text-align: center;
+            color: #ff69b4;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        .heart-msg {
+            font-size: 28px;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+            text-align: center;
+            line-height: 1.8;
+            max-width: 800px;
+            padding: 20px;
+            animation: pop 1.5s ease-in-out;
+        }
+        @keyframes pop {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Step 1 -->
+<div class="container" id="step1">
+    <h1>Hey Vicky! 🎉🐾</h1>
+    <p>Are you ready for a cute, funny, and heartwarming surprise? 💕</p>
+    <button onclick="goToStep(2)">Yes, show me! 🥰</button>
+</div>
+
+<!-- Step 2 -->
+<div class="container hidden" id="step2">
+    <h1>✨ Your day just got magical! 💖</h1>
+    <p>Watch the emojis glide with joy! 🎉💃</p>
+    <button onclick="goToStep(3)">Next ➡️</button>
+</div>
+
+<!-- Step 3 -->
+<div class="container hidden" id="step3">
+    <h1>🎂 Happy Birthday, Vicky! ❤️</h1>
+    <p>You're cuter than these emojis gliding around! 😘💫</p>
+    <button onclick="goToStep(4)">See the message 💖</button>
+</div>
+
+<!-- Final Heart Message -->
+<div class="heart-container hidden" id="step4">
+    <div class="heart">💖</div>
+    <div class="heart-msg">
+        ✨ To Vicky,<br>
+        On your special day, I just want you to know…<br>
+        You're like a <strong>limited edition chocolate bar</strong> 🍫—<br>
+        <strong>Sweet, rare, and absolutely irreplaceable!</strong> 💕<br>
+        May your day be filled with <strong>giggles, cake, and silly dancing</strong> 💃🍰<br>
+        And if anyone tries to steal your cake... 🍰<br>
+        <strong>I shall personally challenge them to a dance-off.</strong> 💃🕺<br>
+        Happiest Birthday, Vicky! 🎉🎂❤️
+    </div>
+</div>
+
+<script>
+    function goToStep(step) {
+        // Hide all steps
+        document.getElementById('step1').classList.add('hidden');
+        document.getElementById('step2').classList.add('hidden');
+        document.getElementById('step3').classList.add('hidden');
+        document.getElementById('step4').classList.add('hidden');
+
+        // Display only the current step
+        document.getElementById(`step${step}`).classList.remove('hidden');
+
+        // Only add emojis at step 2
+        if (step === 2) {
+            addEmojis();
+        }
+
+        // Final message with proper fade-in
+        if (step === 4) {
+            const heartContainer = document.getElementById('step4');
+            heartContainer.classList.remove('hidden');
+            setTimeout(() => {
+                heartContainer.classList.add('show');
+            }, 100);
+        }
+    }
+
+    function addEmojis() {
+        const emojis = ['🎉', '🎂', '💖', '💃', '🥳', '🎁', '😻', '🍰', '🎈', '🎊'];
+
+        // Clear previous emojis
+        document.querySelectorAll('.emoji').forEach(e => e.remove());
+
+        // Add new emojis
+        for (let i = 0; i < 25; i++) {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+            // Random position
+            emoji.style.left = `${Math.random() * 100}vw`;
+            emoji.style.top = `${Math.random() * 100}vh`;
+            emoji.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+            document.body.appendChild(emoji);
+        }
+    }
+</script>
+
+</body>
+</html>
